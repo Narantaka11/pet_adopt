@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:pet_adopt/pages/petneeds/pet_needs.dart';
 import 'package:provider/provider.dart';
 
 import '../../configuration.dart';
 import '../../models/models.dart';
+import '../add_pet/add_pet_page.dart';
 import 'home_page_widgets.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -21,6 +23,59 @@ class _HomeScreenState extends State<HomeScreen> {
     final petCategory = Provider.of<AnimalCategoryBottomModel>(context).number;
     final petsLength = Provider.of<AnimalSelectedModel>(context).petsLength;
     final size = MediaQuery.of(context).size;
+    final indexDrawer = Provider.of<DrawerOptionModel>(context).number;
+
+    Widget getBodyContent() {
+      switch (indexDrawer) {
+        case 1:
+          return Stack(
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.only(top: size.height * 0.12),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFF6F6F6),
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(isDrawerOpen ? 40.0 : 0),
+                    topRight: Radius.circular(kPadding * 0.5),
+                    topLeft: Radius.circular(kPadding * 0.5),
+                  ),
+                ),
+              ),
+              Positioned(
+                top: size.height * 0.02,
+                bottom: 0,
+                child: AnimalList(
+                  size: size,
+                  isDrawerOpen: isDrawerOpen,
+                  petsLength: petsLength,
+                ),
+              ),
+              Positioned(
+                top: size.height * 0.015,
+                child: const SearchBoxText(),
+              ),
+              Positioned(
+                top: size.height * 0.12,
+                child: Container(
+                  alignment: Alignment.center,
+                  width: size.width,
+                  height: size.height * 0.135,
+                  child: PerCategoryIconsButtons(
+                    size: size,
+                    petCategory: petCategory,
+                  ),
+                ),
+              ),
+            ],
+          );
+        case 2:
+          return const AddPetPage();
+        case 3:
+          return const PetNeedsPage();
+       default:
+           return const Center(child: Text('Page not implemented'));
+      }
+    }
 
     return AnimatedContainer(
       curve: Curves.decelerate,
@@ -33,41 +88,16 @@ class _HomeScreenState extends State<HomeScreen> {
         borderRadius: BorderRadius.circular(isDrawerOpen ? 40.0 : 0),
       ),
       child: Stack(
-        children: <Widget>[
-          // Background container
-          Container(
-            margin: EdgeInsets.only(top: size.height * 0.12),
-            decoration: BoxDecoration(
-              color: const Color(0xFFF6F6F6),
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(isDrawerOpen ? 40.0 : 0),
-                topRight: Radius.circular(kPadding * 1.5),
-                topLeft: Radius.circular(kPadding * 1.5),
-              ),
-            ),
-          ),
-
-          // Pet carousel
-          Positioned(
-            top: size.height * 0.17,
-            bottom: 0,
-            child: AnimalList(
-              size: size,
-              isDrawerOpen: isDrawerOpen,
-              petsLength: petsLength,
-            ),
-          ),
-
-          // Top bar with menu, location, and profile
+        children: [
+          // AppBar and drawer toggle
           Positioned(
             top: 15,
             child: Container(
               width: size.width,
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 1),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  // Menu or back icon
                   IconButton(
                     icon: Icon(
                       isDrawerOpen ? Icons.arrow_back_ios : Icons.menu,
@@ -89,8 +119,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       });
                     },
                   ),
-
-                  // Location info
                   Column(
                     children: <Widget>[
                       const Text(
@@ -119,8 +147,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ],
                   ),
-
-                  // Profile picture
                   const CircleAvatar(
                     radius: 24,
                     backgroundImage:
@@ -131,24 +157,13 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
 
-          // Search box
+          // Main Content Area
           Positioned(
-            top: size.height * 0.13,
-            child: const SearchBoxText(),
-          ),
-
-          // Category icons
-          Positioned(
-            top: size.height * 0.25,
-            child: Container(
-              alignment: Alignment.center,
-              width: size.width,
-              height: size.height * 0.135,
-              child: PerCategoryIconsButtons(
-                size: size,
-                petCategory: petCategory,
-              ),
-            ),
+            top: size.height * 0.1,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: getBodyContent(),
           ),
         ],
       ),

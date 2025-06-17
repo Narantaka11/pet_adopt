@@ -1,42 +1,69 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'pages/custom_drawer/drawScreen.dart';
+
 import 'models/models.dart';
 import 'pages/home_page/homeScreen.dart';
+import 'pages/custom_drawer/drawScreen.dart';
+import 'pages/login/login_page.dart';
+import 'pages/login/start_page.dart';
+import 'pages/login/register_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Atur status bar dan orientasi
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    systemNavigationBarColor: Colors.transparent, // navigation bar color
-    statusBarColor: Colors.transparent, // status color bar
-    statusBarIconBrightness: Brightness.light, // status bar icon color
+    systemNavigationBarColor: Colors.transparent,
+    statusBarColor: Colors.transparent,
+    statusBarIconBrightness: Brightness.light,
   ));
-  SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-  runApp(MultiProvider(
-    providers: [
-      ChangeNotifierProvider(create: (_) => AnimalCategoryBottomModel()),
-      ChangeNotifierProvider(create: (_) => AnimalSelectedModel()),
-      ChangeNotifierProvider(create: (_) => DrawerOptionModel()),
-    ],
-    child: MaterialApp(
-      home: MyApp(),
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(fontFamily: 'Circular'),
+
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AnimalCategoryBottomModel()),
+        ChangeNotifierProvider(create: (_) => AnimalSelectedModel()),
+        ChangeNotifierProvider(create: (_) => DrawerOptionModel()),
+      ],
+      child: const MyApp(),
     ),
-  ));
+  );
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const StartPage(),
+        '/login': (context) => const LoginPage(),
+        '/register': (context) => const RegisterPage(),
+        '/home': (context) => const MainAppLayout(),
+      },
+    );
+  }
+}
+
+// Layout utama setelah login: berisi drawer + halaman utama
+class MainAppLayout extends StatelessWidget {
+  const MainAppLayout({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
         body: Stack(
-          children: <Widget>[
+          children: [
             DrawerScreen(),
             HomeScreen(),
           ],

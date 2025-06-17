@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../configuration.dart';
 import '../../models/models.dart';
+import '../add_pet/add_pet_page.dart';
+import '../petneeds/pet_needs.dart';
 
 class DrawerScreen extends StatefulWidget {
   @override
@@ -12,6 +14,9 @@ class _DrawerScreenState extends State<DrawerScreen> {
   @override
   Widget build(BuildContext context) {
     int indexDrawer = Provider.of<DrawerOptionModel>(context).number;
+    void _logout(BuildContext context) {
+      Navigator.pushReplacementNamed(context, '/');
+    }
 
     return Container(
       color: primaryGreen,
@@ -48,41 +53,62 @@ class _DrawerScreenState extends State<DrawerScreen> {
             ],
           ),
           Column(
-            children: drawerItems
-                .map((element) => Padding(
-                      padding: const EdgeInsets.all(15),
-                      child: GestureDetector(
-                        onTap: () {
-                          Provider.of<DrawerOptionModel>(context, listen: false)
-                              .number = element['id'];
-                        },
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              element['icon'],
-                              color: indexDrawer == element['id']
-                                  ? Colors.white
-                                  : Colors.white38,
-                              size: 30,
-                            ),
-                            SizedBox(
-                              width: 30,
-                            ),
-                            Text(
-                              element['title'],
-                              style: TextStyle(
+            children: [
+              ...drawerItems
+                  .map((element) => Padding(
+                        padding: const EdgeInsets.all(15),
+                        child: GestureDetector(
+                          onTap: () {
+                            Provider.of<DrawerOptionModel>(context, listen: false)
+                                .number = element['id'];
+                          },
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Icon(
+                                element['icon'],
+                                color: indexDrawer == element['id']
+                                    ? Colors.white
+                                    : Colors.white38,
+                                size: 30,
+                              ),
+                              SizedBox(width: 30),
+                              Text(
+                                element['title'],
+                                style: TextStyle(
                                   color: indexDrawer == element['id']
                                       ? Colors.white
                                       : Colors.white38,
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 20),
-                            ),
-                          ],
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ))
-                .toList(),
+                      ))
+                  .toList(),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+            child: GestureDetector(
+              onTap: () => _logout(context),
+              child: Row(
+                children: const [
+                  Icon(Icons.logout, color: Colors.white60),
+                  SizedBox(width: 10),
+                  Text(
+                    'Log out',
+                    style: TextStyle(
+                      color: Colors.white60,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
           Row(
             children: [
@@ -101,24 +127,6 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(
-                width: 10,
-              ),
-              Container(
-                width: 2,
-                height: 20,
-                color: Colors.white60,
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              Text(
-                'Log out',
-                style: TextStyle(
-                  color: Colors.white60,
-                  fontWeight: FontWeight.bold,
-                ),
-              )
             ],
           )
         ],

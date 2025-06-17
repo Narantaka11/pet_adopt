@@ -11,11 +11,11 @@ List<BoxShadow> shadowList = [
 ];
 
 List<Map> categories = [
-  {'name': 'Cats', 'iconPath': 'lib/assets/images/cat.png'},
-  {'name': 'Dogs', 'iconPath': 'lib/assets/images/dog.png'},
-  {'name': 'Bunnies', 'iconPath': 'lib/assets/images/rabbit.png'},
-  {'name': 'Parrots', 'iconPath': 'lib/assets/images/parrot.png'},
-  {'name': 'Horses', 'iconPath': 'lib/assets/images/horse.png'}
+  {'name': 'Cat', 'iconPath': 'lib/assets/images/cat.png'},
+  {'name': 'Dog', 'iconPath': 'lib/assets/images/dog.png'},
+  {'name': 'Bunny', 'iconPath': 'lib/assets/images/rabbit.png'},
+  {'name': 'Parrot', 'iconPath': 'lib/assets/images/parrot.png'},
+  {'name': 'Horse', 'iconPath': 'lib/assets/images/horse.png'}
 ];
 
 List<Map> CatsList = [
@@ -132,10 +132,10 @@ List<Map> HorseList = [
 
 List<Map> drawerItems = [
   {'id': 1, 'icon': FontAwesomeIcons.paw, 'title': 'Adoption'},
-  {'id': 2, 'icon': Icons.mail, 'title': 'Donation'},
-  {'id': 3, 'icon': FontAwesomeIcons.plus, 'title': 'Add pet'},
+  {'id': 2, 'icon': FontAwesomeIcons.plus, 'title': 'Add pet'},
+  {'id': 3, 'icon': Icons.trolley, 'title': 'Pet Needs'},
   {'id': 4, 'icon': Icons.favorite, 'title': 'Favorites'},
-  {'id': 5, 'icon': Icons.mail, 'title': 'Messages'},
+  {'id': 5, 'icon': Icons.check_box, 'title': 'Shipping'},
   {'id': 6, 'icon': FontAwesomeIcons.userLarge, 'title': 'Profile'},
 ];
 

@@ -316,7 +316,7 @@ class SearchBoxText extends StatelessWidget {
         borderRadius: BorderRadius.circular(25),
       ),
       child: const TextField(
-        enabled: false,
+        enabled: true,
         decoration: InputDecoration(
           fillColor: Colors.white,
           filled: true,
