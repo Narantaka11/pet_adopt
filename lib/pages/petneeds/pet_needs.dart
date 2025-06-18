@@ -71,11 +71,11 @@ class _PetNeedsPageState extends State<PetNeedsPage> {
         });
       },
       child: Container(
-        width: 80,
+        width: 90,
         margin: const EdgeInsets.only(right: 12),
         padding: const EdgeInsets.symmetric(vertical: 12),
         decoration: BoxDecoration(
-          color: isSelected ? const Color(0xFF476D6D) : Colors.white,
+          color: isSelected ? const Color(0xff416d6d) : Colors.white,
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             if (isSelected)
@@ -89,14 +89,14 @@ class _PetNeedsPageState extends State<PetNeedsPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, size: 28, color: isSelected ? Colors.white : const Color(0xFF476D6D)),
+            Icon(icon, size: 28, color: isSelected ? Colors.white : const Color(0xff416d6d)),
             const SizedBox(height: 4),
             Text(
               label,
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.bold,
-                color: isSelected ? Colors.white : const Color(0xFF476D6D),
+                color: isSelected ? Colors.white : const Color(0xff416d6d),
               ),
               textAlign: TextAlign.center,
             ),
@@ -148,7 +148,7 @@ class _PetNeedsPageState extends State<PetNeedsPage> {
     String stock,
   ) {
     return Container(
-      height: 240,
+      height: 250,
       margin: const EdgeInsets.only(bottom: 20),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -164,7 +164,7 @@ class _PetNeedsPageState extends State<PetNeedsPage> {
             child: Container(
               width: 180,
               height: double.infinity,
-              color: const Color(0xFF476D6D),
+              color: Colors.blueGrey[300],
               alignment: Alignment.center,
               child: Image.asset(
                 imagePath,
@@ -201,7 +201,7 @@ class _PetNeedsPageState extends State<PetNeedsPage> {
                       );
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF476D6D),
+                        backgroundColor: const Color(0xff416d6d),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
                         ),

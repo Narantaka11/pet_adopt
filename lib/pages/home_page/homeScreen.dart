@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pet_adopt/pages/cart/cart.dart';
 import 'package:pet_adopt/pages/petneeds/pet_needs.dart';
+import 'package:pet_adopt/pages/review/review_page.dart';
+import 'package:pet_adopt/pages/tracking/tracking_page.dart';
 import 'package:provider/provider.dart';
 
 import '../../configuration.dart';
@@ -75,8 +77,12 @@ class _HomeScreenState extends State<HomeScreen> {
           return const PetNeedsPage();
         case 4:
           return const CartPage();
-       default:
-           return const Center(child: Text('Page not implemented'));
+        case 5:
+          return TrackingPage();
+        case 6:
+          return ReviewsPage();
+      default:
+          return const Center(child: Text('Page not implemented'));
       }
     }
 

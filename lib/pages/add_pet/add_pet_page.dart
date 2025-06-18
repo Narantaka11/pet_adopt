@@ -1,41 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart'; // Opsional → untuk animasi upload atau pet
 
 class AddPetPage extends StatelessWidget {
   const AddPetPage({super.key});
 
-    @override
-    Widget build(BuildContext context) {
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        centerTitle: true,
-        title: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 2),
-          decoration: BoxDecoration(
-            color: const Color(0xFF5D8C8C),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: const Text(
-            "Add Pet",
-            style: TextStyle(
-              color: Colors.white60,
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-        foregroundColor: const Color(0xFF5D8C8C),
-        elevation: 0,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+      backgroundColor: Colors.grey[100],
+      body: SafeArea(
         child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              _buildHeader(),
+              const SizedBox(height: 20),
+              Center(
+                child: Lottie.asset(
+                  'lib/assets/animations/addpet.json', // atau ganti dengan Image.asset()
+                  height: 150,
+                ),
+              ),
+              const SizedBox(height: 20),
               _buildLabel("Pet Name"),
-              _buildTextField(hint: "Enter pet name"),
+              _buildTextField(hint: "Enter pet name", icon: Icons.pets),
               const SizedBox(height: 16),
 
               _buildLabel("Type"),
@@ -43,15 +31,15 @@ class AddPetPage extends StatelessWidget {
               const SizedBox(height: 16),
 
               _buildLabel("Breed"),
-              _buildTextField(hint: "Enter breed"),
+              _buildTextField(hint: "Enter breed", icon: Icons.category),
               const SizedBox(height: 16),
 
               _buildLabel("Age (Years)"),
-              _buildTextField(hint: "Enter age", keyboardType: TextInputType.number),
+              _buildTextField(hint: "Enter age", keyboardType: TextInputType.number, icon: Icons.cake),
               const SizedBox(height: 16),
 
               _buildLabel("Location"),
-              _buildTextField(hint: "Enter location"),
+              _buildTextField(hint: "Enter location", icon: Icons.location_on),
               const SizedBox(height: 16),
 
               _buildLabel("Upload Photo"),
@@ -59,33 +47,32 @@ class AddPetPage extends StatelessWidget {
                 onPressed: () {
                   // Tambahkan fungsi upload di sini
                 },
-                icon: const Icon(Icons.upload, color: Colors.white60),
+                icon: const Icon(Icons.upload, color: Colors.white),
                 label: const Text("Upload Image"),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF5D8C8C),
+                  backgroundColor: const Color(0xFF4E6E6A),
                   foregroundColor: Colors.white,
+                  minimumSize: const Size(double.infinity, 45),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                 ),
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: 30),
 
-              Center(
-                child: ElevatedButton(
-                  onPressed: () {
-                    // Tambahkan aksi simpan
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF5D8C8C),
-                    padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 14),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
+              ElevatedButton(
+                onPressed: () {
+                  // Tambahkan aksi simpan
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF4E6E6A),
+                  padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 14),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
                   ),
-                  child: const Text(
-                    "Submit",
-                    style: TextStyle(fontSize: 16, color: Colors.white),
-                  ),
+                  elevation: 4,
+                  minimumSize: const Size(double.infinity, 50),
                 ),
-              )
+                child: const Text("Submit", style: TextStyle(fontSize: 18, color: Colors.white)),
+              ),
             ],
           ),
         ),
@@ -93,22 +80,61 @@ class AddPetPage extends StatelessWidget {
     );
   }
 
-  Widget _buildLabel(String text) {
-    return Text(
-      text,
-      style: const TextStyle(color: Color(0xFF5D8C8C), fontSize: 16, fontWeight: FontWeight.bold),
+  Widget _buildHeader() {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: const [
+          Text(
+            '🐾 Add New Pet',
+            style: TextStyle(
+              color: const Color(0xFF4E6E6A),
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: 4),
+          Text(
+            'Fill in the details below to list your pet.',
+            style: TextStyle(
+              color: const Color(0xFF4E6E6A),
+              fontSize: 14,
+            ),
+          ),
+        ],
+      ),
     );
   }
 
-  Widget _buildTextField({required String hint, TextInputType keyboardType = TextInputType.text}) {
+  Widget _buildLabel(String text) {
+    return Text(
+      text,
+      style: const TextStyle(
+        color: Color(0xFF4E6E6A),
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+      ),
+    );
+  }
+
+  Widget _buildTextField({
+    required String hint,
+    TextInputType keyboardType = TextInputType.text,
+    required IconData icon,
+  }) {
     return TextField(
       keyboardType: keyboardType,
-      style: const TextStyle(color: Colors.white),
       decoration: InputDecoration(
         hintText: hint,
-        hintStyle: const TextStyle(color: Colors.white60),
+        prefixIcon: Icon(icon, color: Colors.teal[700]),
         filled: true,
-        fillColor: const Color(0xFF5D8C8C),
+        fillColor: Colors.white,
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
       ),
     );
@@ -118,14 +144,14 @@ class AddPetPage extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12),
       decoration: BoxDecoration(
-        color: const Color(0xFF5D8C8C),
+        color: Colors.white,
         borderRadius: BorderRadius.circular(10),
       ),
       child: DropdownButtonFormField<String>(
-        dropdownColor: const Color(0xFF5D8C8C),
+        dropdownColor: Colors.white,
         decoration: const InputDecoration(border: InputBorder.none),
-        iconEnabledColor: Colors.white,
-        style: const TextStyle(color: Colors.white),
+        iconEnabledColor: Colors.teal,
+        style: const TextStyle(color: Color(0xFF4E6E6A), fontWeight: FontWeight.w500),
         items: items
             .map((item) => DropdownMenuItem<String>(
                   value: item,

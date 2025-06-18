@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:pet_adopt/pages/cart/cart.dart';
+import 'package:pet_adopt/pages/payment/payment_page.dart';
+import 'package:pet_adopt/pages/profile/editprofilepage.dart';
+import 'package:pet_adopt/pages/tracking/tracking_page.dart';
 import 'package:provider/provider.dart';
 
 import 'models/models.dart';
@@ -48,6 +52,10 @@ class MyApp extends StatelessWidget {
         '/login': (context) => const LoginPage(),
         '/register': (context) => const RegisterPage(),
         '/home': (context) => const MainAppLayout(),
+        '/cart': (context) => const CartPage(),
+        '/payment': (context) => const PaymentPage(),
+        '/tracking': (context) => const TrackingPage(),
+        '/profile': (context) => const EditProfilePage(),
       },
     );
   }

@@ -1,89 +1,120 @@
 import 'package:flutter/material.dart';
-import '../home_page/homeScreen.dart'; // ganti jika perlu
+import 'package:lottie/lottie.dart';
 
 class RegisterPage extends StatelessWidget {
-  const RegisterPage({super.key});
+  const RegisterPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF476D6D),
+      backgroundColor: const Color(0xFF4E6E6A),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        foregroundColor: Colors.white,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30),
-        child: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                const Text(
-                  'Create Account',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 30),
-
-                _buildTextField(hint: 'Full Name'),
-                const SizedBox(height: 20),
-
-                _buildTextField(hint: 'Email'),
-                const SizedBox(height: 20),
-
-                _buildTextField(hint: 'Password', isPassword: true),
-                const SizedBox(height: 30),
-
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushReplacementNamed(context, '/home');
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF2E4C4C),
-                    padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 14),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  child: const Text(
-                    'Register',
-                    style: TextStyle(fontSize: 16, color: Colors.white),
-                  ),
-                ),
-                const SizedBox(height: 20),
-
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text(
-                    'Already have an account? Login',
-                    style: TextStyle(color: Colors.white70),
-                  ),
-                )
-              ],
-            ),
-          ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
       ),
-    );
-  }
-
-  Widget _buildTextField({required String hint, bool isPassword = false}) {
-    return TextField(
-      obscureText: isPassword,
-      style: const TextStyle(color: Colors.white),
-      decoration: InputDecoration(
-        hintText: hint,
-        hintStyle: const TextStyle(color: Colors.white70),
-        filled: true,
-        fillColor: const Color(0xFF5D8C8C),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 10),
+            Center(
+              child: Column(
+                children: [
+                  Lottie.asset(
+                    'lib/assets/animations/pet_register.json',
+                    height: 180,
+                    fit: BoxFit.contain,
+                  ),
+                  const SizedBox(height: 10),
+                  const Text(
+                    'Create Account',
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      shadows: [
+                        Shadow(
+                          offset: Offset(1, 1),
+                          blurRadius: 3,
+                          color: Colors.black26,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 30),
+            const Text('Full Name', style: TextStyle(color: Colors.white, fontSize: 16)),
+            const SizedBox(height: 8),
+            TextField(
+              decoration: InputDecoration(
+                hintText: 'Enter your name',
+                prefixIcon: const Icon(Icons.person, color: Colors.teal),
+                filled: true,
+                fillColor: Colors.white.withOpacity(0.9),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+              ),
+            ),
+            const SizedBox(height: 15),
+            const Text('Email', style: TextStyle(color: Colors.white, fontSize: 16)),
+            const SizedBox(height: 8),
+            TextField(
+              decoration: InputDecoration(
+                hintText: 'Enter your email',
+                prefixIcon: const Icon(Icons.email, color: Colors.teal),
+                filled: true,
+                fillColor: Colors.white.withOpacity(0.9),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+              ),
+            ),
+            const SizedBox(height: 15),
+            const Text('Password', style: TextStyle(color: Colors.white, fontSize: 16)),
+            const SizedBox(height: 8),
+            TextField(
+              obscureText: true,
+              decoration: InputDecoration(
+                hintText: 'Enter your password',
+                prefixIcon: const Icon(Icons.lock, color: Colors.teal),
+                filled: true,
+                fillColor: Colors.white.withOpacity(0.9),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+              ),
+            ),
+            const SizedBox(height: 24),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, '/home'); // Sesuaikan route
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.white,
+                foregroundColor: const Color(0xFF4E6E6A),
+                minimumSize: const Size(double.infinity, 50),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                elevation: 4,
+              ),
+              child: const Text('Register', style: TextStyle(fontSize: 18)),
+            ),
+            const SizedBox(height: 16),
+            Center(
+              child: TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text(
+                  'Already have an account? Login',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

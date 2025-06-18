@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../configuration.dart';
 import '../../models/models.dart';
-import '../add_pet/add_pet_page.dart';
-import '../petneeds/pet_needs.dart';
 
 class DrawerScreen extends StatefulWidget {
   @override
@@ -14,121 +12,113 @@ class _DrawerScreenState extends State<DrawerScreen> {
   @override
   Widget build(BuildContext context) {
     int indexDrawer = Provider.of<DrawerOptionModel>(context).number;
+
     void _logout(BuildContext context) {
       Navigator.pushReplacementNamed(context, '/');
     }
 
+    void _goToProfile(BuildContext context) {
+      Navigator.pushNamed(context, '/profile');
+    }
+
     return Container(
       color: primaryGreen,
-      padding: EdgeInsets.only(top: 50, bottom: 70, left: 10),
+      padding: const EdgeInsets.only(top: 50, bottom: 30, left: 10, right: 10),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
             children: [
-              SizedBox(width: 8),
-              CircleAvatar(
+              const CircleAvatar(
                 radius: 24,
                 backgroundImage: AssetImage('lib/assets/images/person.jpg'),
               ),
-              SizedBox(
-                width: 10,
-              ),
+              const SizedBox(width: 12),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+                children: const [
                   Text(
                     'Angeline Caroline',
-                    style: TextStyle(
-                        fontSize: 22,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 5),
-                  Text('Active Status',
-                      style: TextStyle(
-                          color: Colors.white60, fontWeight: FontWeight.bold)),
+                  Text(
+                    'Active Status',
+                    style: TextStyle(color: Colors.white60, fontWeight: FontWeight.bold),
+                  ),
                 ],
-              )
+              ),
             ],
           ),
           Column(
-            children: [
-              ...drawerItems
-                  .map((element) => Padding(
-                        padding: const EdgeInsets.all(15),
-                        child: GestureDetector(
-                          onTap: () {
-                            Provider.of<DrawerOptionModel>(context, listen: false)
-                                .number = element['id'];
-                          },
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Icon(
-                                element['icon'],
-                                color: indexDrawer == element['id']
-                                    ? Colors.white
-                                    : Colors.white38,
-                                size: 30,
-                              ),
-                              SizedBox(width: 30),
-                              Text(
-                                element['title'],
-                                style: TextStyle(
-                                  color: indexDrawer == element['id']
-                                      ? Colors.white
-                                      : Colors.white38,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ],
-                          ),
+            children: drawerItems.map((element) {
+              return Padding(
+                padding: const EdgeInsets.all(12),
+                child: GestureDetector(
+                  onTap: () {
+                    Provider.of<DrawerOptionModel>(context, listen: false).number = element['id'];
+                  },
+                  child: Row(
+                    children: [
+                      Icon(
+                        element['icon'],
+                        color: indexDrawer == element['id'] ? Colors.white : Colors.white38,
+                        size: 28,
+                      ),
+                      const SizedBox(width: 20),
+                      Text(
+                        element['title'],
+                        style: TextStyle(
+                          color: indexDrawer == element['id'] ? Colors.white : Colors.white38,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
                         ),
-                      ))
-                  .toList(),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-            child: GestureDetector(
-              onTap: () => _logout(context),
-              child: Row(
-                children: const [
-                  Icon(Icons.logout, color: Colors.white60),
-                  SizedBox(width: 10),
-                  Text(
-                    'Log out',
-                    style: TextStyle(
-                      color: Colors.white60,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ),
+                ),
+              );
+            }).toList(),
           ),
-          Row(
+          Column(
             children: [
-              SizedBox(width: 8),
-              Icon(
-                Icons.settings,
-                color: Colors.white60,
+              GestureDetector(
+                onTap: () => _goToProfile(context),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 18),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: Colors.white.withOpacity(0.1),
+                  ),
+                  child: Row(
+                    children: const [
+                      Icon(Icons.person, color: Colors.white, size: 24),
+                      SizedBox(width: 12),
+                      Text("Profile", style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+                    ],
+                  ),
+                ),
               ),
-              SizedBox(
-                width: 10,
-              ),
-              Text(
-                'Settings',
-                style: TextStyle(
-                  color: Colors.white60,
-                  fontWeight: FontWeight.bold,
+              const SizedBox(height: 16),
+              GestureDetector(
+                onTap: () => _logout(context),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 18),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: Colors.white.withOpacity(0.1),
+                  ),
+                  child: Row(
+                    children: const [
+                      Icon(Icons.logout, color: Colors.white, size: 24),
+                      SizedBox(width: 12),
+                      Text("Log out", style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+                    ],
+                  ),
                 ),
               ),
             ],
-          )
+          ),
         ],
       ),
     );
