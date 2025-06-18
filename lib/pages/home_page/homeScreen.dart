@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pet_adopt/pages/cart/cart.dart';
 import 'package:pet_adopt/pages/petneeds/pet_needs.dart';
 import 'package:provider/provider.dart';
 
@@ -72,6 +73,8 @@ class _HomeScreenState extends State<HomeScreen> {
           return const AddPetPage();
         case 3:
           return const PetNeedsPage();
+        case 4:
+          return const CartPage();
        default:
            return const Center(child: Text('Page not implemented'));
       }

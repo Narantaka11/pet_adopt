@@ -16,14 +16,22 @@ class LoginPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
-                'Selamat Datang!',
+                'Login!',
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 32,
+                  fontSize: 25,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(height: 30),
+                SizedBox(
+                height: 300,
+                child: Image.asset(
+                  'lib/assets/images/logo.png', // ganti sesuai nama file Anda
+                  fit: BoxFit.contain,
+                ),
+              ),
+              const SizedBox(height: 0),
               TextField(
                 decoration: InputDecoration(
                   hintText: 'Email',
@@ -55,21 +63,26 @@ class LoginPage extends StatelessWidget {
                 onPressed: () {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => const MainAppLayout()),
+                    MaterialPageRoute(
+                      builder: (context) => const MainAppLayout(),
+                    ),
                   );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF2E4C4C),
-                  padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 14),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 50,
+                    vertical: 14,
+                  ),
                   shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(12),
                   ),
                 ),
                 child: const Text(
                   'Login',
                   style: TextStyle(fontSize: 16, color: Colors.white),
                 ),
-              )
+              ),
             ],
           ),
         ),

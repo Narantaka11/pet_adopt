@@ -8,7 +8,7 @@ class PetNeedsPage extends StatefulWidget {
 }
 
 class _PetNeedsPageState extends State<PetNeedsPage> {
-  String selectedCategory = 'Makanan';
+  String selectedCategory = 'Food';
 
   @override
   Widget build(BuildContext context) {
@@ -110,31 +110,30 @@ class _PetNeedsPageState extends State<PetNeedsPage> {
     switch (selectedCategory) {
       case 'Food':
         return [
-          _buildNeedCard('lib/assets/images/food1.png', "Royal Canin", "Dry Food", "10", "Warehouse A"),
-          _buildNeedCard('lib/assets/images/food2.png', "Whiskas", "Wet Food", "12", "Warehouse A"),
-          _buildNeedCard('lib/assets/images/food3.png', "Pedigree", "Puppy Food", "8", "Warehouse B"),
-          _buildNeedCard('lib/assets/images/food4.png', "Brit", "Cat Food", "14", "Warehouse C"),
+          _buildNeedCard('lib/assets/images/food1.png', "Royal Canin", "Dry Food", "\$25", "10"),
+          _buildNeedCard('lib/assets/images/food2.png', "Whiskas", "Wet Food", "\$18", "12"),
+          _buildNeedCard('lib/assets/images/food3.png', "Pedigree", "Puppy Food", "\$22", "8"),
+          _buildNeedCard('lib/assets/images/food4.png', "Brit", "Cat Food", "\$20", "14"),
         ];
       case 'Vitamin':
         return [
-          _buildNeedCard('lib/assets/images/vitamin1.png', "Pet Vitamin C", "Vitamin C", "5", "Warehouse B"),
-          _buildNeedCard('lib/assets/images/vitamin2.png', "Omega 3", "Fish Oil", "7", "Warehouse C"),
-          _buildNeedCard('lib/assets/images/vitamin3.png', "Multivit", "Multi Vitamin", "6", "Warehouse A"),
-          _buildNeedCard('lib/assets/images/vitamin4.png', "Glucosamine", "For Bones", "4", "Warehouse B"),
+          _buildNeedCard('lib/assets/images/vitamin1.png', "Pet Vitamin C", "Vitamin C", "\$10", "5"),
+          _buildNeedCard('lib/assets/images/vitamin2.png', "Omega 3", "Fish Oil", "\$12", "7"),
+          _buildNeedCard('lib/assets/images/vitamin3.png', "Multivit", "Multi Vitamin", "\$9", "6"),
+          _buildNeedCard('lib/assets/images/vitamin4.png', "Glucosamine", "For Bones", "\$14", "4"),
         ];
       case 'Toy':
         return [
-          _buildNeedCard('assets/toy_ball.png', "Toy Ball", "Toys For Cats", "7", "Warehouse C"),
-          _buildNeedCard('assets/toy_mouse.png', "Toy Mouse", "Toys For Cats", "6", "Warehouse B"),
-          _buildNeedCard('assets/toy_rope.png', "Toy Rope", "Toys For Dogs", "10", "Warehouse A"),
-          _buildNeedCard('assets/toy_feather.png', "Toy Feather", "Interactive Toys", "9", "Warehouse C"),
+          _buildNeedCard('lib/assets/images/toy_ball.png', "Toy Ball", "Toys For Cats", "\$7", "7"),
+          _buildNeedCard('lib/assets/images/toy_mouse.png', "Toy Mouse", "Toys For Cats", "\$6", "6"),
+          _buildNeedCard('lib/assets/images/toy_rope.png', "Toy Rope", "Toys For Dogs", "\$8", "10"),
+          _buildNeedCard('lib/assets/images/toy_feather.png', "Toy Feather", "Interactive Toys", "\$9", "9"),
         ];
       case 'Equipment':
         return [
-          _buildNeedCard('assets/tools.png', "Animals Comb", "Grooming", "3", "Warehouse D"),
-          _buildNeedCard('assets/tools2.png', "Place To Eat", "For Foods", "5", "Warehouse A"),
-          _buildNeedCard('assets/tools3.png', "Animal Feeding Bowl", "For Foods", "2", "Warehouse B"),
-          _buildNeedCard('assets/tools4.png', "Folding Cage", "Portable crate", "4", "Warehouse C"),
+          _buildNeedCard('lib/assets/images/tools1.png', "Animals Comb", "Grooming", "\$5", "3"),
+          _buildNeedCard('lib/assets/images/tools2.png', "Feeding Bowl", "For Foods", "\$6", "5"),
+          _buildNeedCard('lib/assets/images/tools3.png', "Pet Carrier", "Carrier", "\$25", "2"),
         ];
       default:
         return [];
@@ -145,11 +144,11 @@ class _PetNeedsPageState extends State<PetNeedsPage> {
     String imagePath,
     String title,
     String subtitle,
+    String price,
     String stock,
-    String location,
   ) {
     return Container(
-      height: 220,
+      height: 240,
       margin: const EdgeInsets.only(bottom: 20),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -161,7 +160,7 @@ class _PetNeedsPageState extends State<PetNeedsPage> {
       child: Row(
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(15),
+            borderRadius: BorderRadius.circular(25),
             child: Container(
               width: 180,
               height: double.infinity,
@@ -181,22 +180,35 @@ class _PetNeedsPageState extends State<PetNeedsPage> {
               padding: const EdgeInsets.all(14),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(title,
-                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                  Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
                   const SizedBox(height: 4),
                   Text(subtitle, style: const TextStyle(color: Colors.grey, fontSize: 14)),
                   const SizedBox(height: 8),
+                  Text("Price: $price", style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 4),
                   Text("Stock: $stock", style: const TextStyle(fontSize: 14)),
-                  const SizedBox(height: 6),
-                  Row(
-                    children: [
-                      const Icon(Icons.location_on, size: 16, color: Colors.green),
-                      const SizedBox(width: 4),
-                      Text(location, style: const TextStyle(fontSize: 13)),
-                    ],
-                  )
+                  const Spacer(),
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: ElevatedButton(
+                      onPressed: () {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                          content: Text('$title Adding to cart'),
+                          duration: const Duration(seconds: 1),
+                        ),
+                      );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF476D6D),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                      ),
+                      child: const Text("Add to cart", style: TextStyle(color: Colors.white)),
+                    ),
+                  ),
                 ],
               ),
             ),

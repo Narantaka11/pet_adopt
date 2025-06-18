@@ -13,9 +13,7 @@ List<BoxShadow> shadowList = [
 List<Map> categories = [
   {'name': 'Cat', 'iconPath': 'lib/assets/images/cat.png'},
   {'name': 'Dog', 'iconPath': 'lib/assets/images/dog.png'},
-  {'name': 'Bunny', 'iconPath': 'lib/assets/images/rabbit.png'},
-  {'name': 'Parrot', 'iconPath': 'lib/assets/images/parrot.png'},
-  {'name': 'Horse', 'iconPath': 'lib/assets/images/horse.png'}
+  {'name': 'Others', 'iconPath': 'lib/assets/images/house.png'}
 ];
 
 List<Map> CatsList = [
@@ -24,6 +22,7 @@ List<Map> CatsList = [
     'race': 'Abyssinian cat',
     'male': false,
     'years': '2 years old',
+    'price': '\$120',
     'distance': 'Distance: 3.6km',
     'image': 'lib/assets/images/pet-cat2.png'
   },
@@ -32,6 +31,7 @@ List<Map> CatsList = [
     'race': 'Abyssinian cat',
     'male': true,
     'years': '1.5 years old',
+    'price': '\$120',
     'distance': 'Distance: 7.8km',
     'image': 'lib/assets/images/pet-cat1.png'
   },
@@ -40,6 +40,7 @@ List<Map> CatsList = [
     'race': 'N/A',
     'male': false,
     'years': '0.5 years old',
+    'price': '\$120',
     'distance': 'Distance: 1.6km',
     'image': 'lib/assets/images/cat1.png'
   },
@@ -48,6 +49,7 @@ List<Map> CatsList = [
     'race': 'Abyssinian cat',
     'male': true,
     'years': '2.9 years old',
+    'price': '\$120',
     'distance': 'Distance: 10.2km',
     'image': 'lib/assets/images/cat2.png'
   },
@@ -56,6 +58,7 @@ List<Map> CatsList = [
     'race': 'N/A',
     'male': false,
     'years': '1.3 years old',
+    'price': '\$120',
     'distance': 'Distance: 3.2km',
     'image': 'lib/assets/images/cat3.png'
   },
@@ -67,6 +70,7 @@ List<Map> DogsList = [
     'race': 'Dutch Shepherd',
     'male': true,
     'years': '2.3 years old',
+    'price': '\$120',
     'distance': 'Distance: 5.6km',
     'image': 'lib/assets/images/dog1.png'
   },
@@ -75,17 +79,19 @@ List<Map> DogsList = [
     'race': 'N/D',
     'male': true,
     'years': '1.2 years old',
+    'price': '\$120',
     'distance': 'Distance: 0.8km',
     'image': 'lib/assets/images/dog2.png'
   },
 ];
 
-List<Map> BunnyList = [
+List<Map> OthersList = [
   {
     'name': 'Snoopy',
     'race': 'N/A',
     'male': false,
     'years': '0.2 years old',
+    'price': '\$120',
     'distance': 'Distance: 1.23km',
     'image': 'lib/assets/images/bunny1.png'
   },
@@ -94,17 +100,16 @@ List<Map> BunnyList = [
     'race': 'N/A',
     'male': true,
     'years': '0.2 years old',
+    'price': '\$120',
     'distance': 'Distance: 0.8km',
     'image': 'lib/assets/images/bunny2.png'
   },
-];
-
-List<Map> BirdsList = [
   {
     'name': 'Bubba',
     'race': 'N/A',
     'male': true,
     'years': '1.2 years old',
+    'price': '\$120',
     'distance': 'Distance: 1.23km',
     'image': 'lib/assets/images/bird1.png'
   },
@@ -113,17 +118,16 @@ List<Map> BirdsList = [
     'race': 'N/A',
     'male': false,
     'years': '0.65 years old',
+    'price': '\$120',
     'distance': 'Distance: 2.8km',
     'image': 'lib/assets/images/bird2.png'
   },
-];
-
-List<Map> HorseList = [
   {
     'name': 'Bella',
     'race': 'N/A',
     'male': true,
     'years': '5.7 years old',
+    'price': '\$120',
     'distance': 'Distance: 22.1km',
     'image': 'lib/assets/images/horse1.png'
   },
@@ -134,9 +138,9 @@ List<Map> drawerItems = [
   {'id': 1, 'icon': FontAwesomeIcons.paw, 'title': 'Adoption'},
   {'id': 2, 'icon': FontAwesomeIcons.plus, 'title': 'Add pet'},
   {'id': 3, 'icon': Icons.trolley, 'title': 'Pet Needs'},
-  {'id': 4, 'icon': Icons.favorite, 'title': 'Favorites'},
-  {'id': 5, 'icon': Icons.check_box, 'title': 'Shipping'},
-  {'id': 6, 'icon': FontAwesomeIcons.userLarge, 'title': 'Profile'},
+  {'id': 4, 'icon': Icons.shopping_cart, 'title': 'Cart'},
+  {'id': 5, 'icon': Icons.local_shipping, 'title': 'Shipping'},
+  {'id': 6, 'icon': Icons.reviews, 'title': 'Review'},
 ];
 
 const String dummyText =

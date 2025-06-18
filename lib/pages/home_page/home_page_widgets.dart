@@ -148,6 +148,13 @@ class PetDescription extends StatelessWidget {
                         color: Colors.black54,
                         fontWeight: FontWeight.w500),
                   ),
+                  Text(
+                    categoryList[index]['price'] as String,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: Colors.black54,
+                      fontWeight: FontWeight.w500),
+                    ),
                   const SizedBox(height: 5),
                   Row(
                     children: [
@@ -275,16 +282,8 @@ class PerCategoryIconsButtons extends StatelessWidget {
                   animalModel.categoryList = DogsList;
                   break;
                 case 2:
-                  animalModel.petsLength = BunnyList.length;
-                  animalModel.categoryList = BunnyList;
-                  break;
-                case 3:
-                  animalModel.petsLength = BirdsList.length;
-                  animalModel.categoryList = BirdsList;
-                  break;
-                case 4:
-                  animalModel.petsLength = HorseList.length;
-                  animalModel.categoryList = HorseList;
+                  animalModel.petsLength = OthersList.length;
+                  animalModel.categoryList = OthersList;
                   break;
               }
             },
